@@ -214,3 +214,73 @@ Agência deve ser inicializada com um valor padrão, assim como o saldo, que dev
 
 Para finalizar, o método de imprimir as informações deve ser apresentado dessa forma:
 
+class Pessoa:
+    def __init__(self, nome, cpf, endereco):
+        self.nome = nome
+        self.cpf = cpf
+        self.endereco = endereco
+
+class Endereco:
+    def __init__(self, rua, numero, bairro, cidade):
+        self.rua = rua
+        self.numero = numero
+        self.bairro = bairro
+        self.cidade = cidade
+
+class Conta:
+    def __init__(self, conta, favorecido, limite):
+        self.agencia = 1234
+        self.conta = conta
+        self.favorecido = favorecido
+        self.saldo = 0.0
+        self.limite = limite
+
+    def depositaValor(self, valor):
+        if valor > 0:
+            self.saldo += valor
+        else:
+            print('Valor de depósito inválido')
+
+    def sacaValor(self, valor):
+        if valor < self.saldo:
+            self.saldo -= valor
+        else:
+            if valor < (self.saldo + self.limite):
+                self.limite -= (valor - self.saldo)
+                self.saldo = 0
+            else:
+                print('Saldo insuficiente')
+
+    def transfereValor(self, valor, contaDestino):
+        if valor < self.saldo:
+            self.saldo -= valor
+            contaDestino.saldo += valor
+        else:
+            print('Saldo insuficiente')
+
+    def imprimiInformacoes(self):
+        print(f'Favorecido {self.favorecido.nome}')
+        print(f'Endereço \n{self.favorecido.endereco.rua},'
+              f'{self.favorecido.endereco.numero},'
+              f'{self.favorecido.endereco.bairro}, '
+              f'{self.favorecido.endereco.cidade}')
+        print('-------------------------')
+        print(f'Agência: {self.agencia} - Conta: {self.conta}')
+        print(f'Saldo: R${self.saldo:.2f}')
+
+endereco1 = Endereco('Rua 1 ', 1 , ' Bairro 1 ', 'Cidade 1')
+endereco2 = Endereco('Rua 2 ', 2 , ' Bairro 2 ', 'Cidade 2')
+pessoa1 = Pessoa('Nome 1', 'CPF 1', endereco1)
+pessoa2 = Pessoa('Nome 2', 'CPF 2', endereco2)
+conta1 = Conta(1234, pessoa1, 1000)
+conta2 = Conta(5678, pessoa2, 1500)
+
+conta1.depositaValor(1200)
+conta2.depositaValor(300)
+conta2.transfereValor(200, conta1)
+conta2.sacaValor(200)
+print(conta2.limite)
+print('----------------------')
+conta1.imprimiInformacoes()
+print('----------------------')
+conta2.imprimiInformacoes()
