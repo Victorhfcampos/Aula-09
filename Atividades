@@ -156,3 +156,61 @@ empresa1.adcEndereco()
 empresa1.apresentarEnd()
 
 Atividade 05
+1 - Crie uma classe chamada produto que conterá como atributos o código, nome e valor.
+2 – Crie uma classe chamada carrinho de compra que terá como único atributo uma lista de produtos que deve se iniciar vazia.
+3 - Crie um método para inserir produtos que receberá um objeto por parâmetro que será incluído na lista.
+4 – Crie um método para listar todos os produtos.
+5 – Finalize criando um método para exibir o valor final.
+
+class Produto:
+    def __init__(self, codigo, nome, valor):
+        self.codigo = codigo
+        self.nome = nome
+        self.valor = valor
+
+class Carrinho:
+    def __init__(self):
+        self.produtos = []
+
+    def inserirProduto(self, produto):
+        self.produtos.append(produto)
+
+    def listarProdutos(self):
+        for i in range(0, len(self.produtos)):
+            print(f'Codigo: {self.produtos[i].codigo}')
+            print(f'Produto: {self.produtos[i].nome}')
+            print(f'Preço: {self.produtos[i].valor}')
+            print('----------------------------------')
+
+    # [{cod: 1, nome: escova, valor: 7.99}, {cod: 2, nome: toalha, valor: 29.99}]
+
+    def total(self):
+        soma = 0
+        for i in range(0, len(self.produtos)):
+            soma += self.produtos[i].valor
+        print(f'O valor total da compra foi de R${soma:.2f}')
+
+produto1 = Produto(1, 'Escova', 7.99)
+produto2 = Produto(2, 'Toalha', 29.99)
+produto3 = Produto(3, 'Café', 6.59)
+
+carrinho = Carrinho()
+carrinho.inserirProduto(produto1)
+carrinho.inserirProduto(produto2)
+carrinho.inserirProduto(produto3)
+carrinho.listarProdutos()
+carrinho.total()
+
+Atividade 06
+Crie uma classe Pessoa que terá nome, cpf e endereço como atributos.
+Em seguida, crie uma classe Endereço que terá rua, número, bairro e cidade como atributos.
+Por fim, crie uma classe Conta Bancária que terá como atributos:
+agencia, conta, saldo, favorecido e limite como atributos e os métodos sacar, depositar, transferir e imprimir informações.
+Você deve seguir algumas regras:
+
+Você deve usar associação por agregação onde o objeto pessoa deverá receber um objeto endereço e o objeto conta deverá receber uma pessoa como favorecido.
+Não esqueça de fazer as validações para saque, depósito e transferência respeitando inclusive os limites estabelecidos.
+Agência deve ser inicializada com um valor padrão, assim como o saldo, que deve começar zerado.
+
+Para finalizar, o método de imprimir as informações deve ser apresentado dessa forma:
+
